@@ -10,12 +10,12 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: const Color(0xffffebd2),
         leading: IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
-              color: Colors.white,
+              color: Color(0xffaf4f41),
             )),
         centerTitle: true,
         title: const Text(

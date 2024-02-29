@@ -281,31 +281,52 @@ class _CalculatorViewState extends State<CalculatorView> {
               ],
             )),
             //calculate
-            Container(
-                margin: const EdgeInsets.only(top: 10),
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        foregroundColor: AppColors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {
-                      // navigation to new screen
+            CustomButton(
+              text: 'Calculate',
+              onPressed: () {
+                {
+                  // navigation to new screen
 
-                      // BMI = 	mass (kg) / height*height (m)
-                      double result =
-                          weight / ((height / 100) * (height / 100));
+                  // BMI = 	mass (kg) / height*height (m)
+                  double result = weight / ((height / 100) * (height / 100));
 
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ResultView(result: result),
-                      ));
-                    },
-                    child: const Text('CALCULATE')))
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ResultView(result: result),
+                  ));
+                }
+              },
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+    this.background,
+  });
+  final Function() onPressed;
+  final String text;
+  final Color? background;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(top: 10),
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: background ?? AppColors.primary,
+                foregroundColor: AppColors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10))),
+            onPressed: onPressed,
+            child: Text(text)));
   }
 }

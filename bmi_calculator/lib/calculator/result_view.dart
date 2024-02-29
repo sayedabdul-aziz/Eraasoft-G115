@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/calculator/app_colors.dart';
+import 'package:bmi_calculator/calculator/calculator_view.dart';
 import 'package:flutter/material.dart';
 
 class ResultView extends StatelessWidget {
@@ -50,6 +51,10 @@ class ResultView extends StatelessWidget {
               result.toStringAsFixed(2),
               style: TextStyle(color: AppColors.white, fontSize: 22),
             ),
+            CustomButton(
+                onPressed: () {},
+                text: 'RE-CALCULATE',
+                background: Colors.grey),
             Container(
                 margin: const EdgeInsets.only(top: 10),
                 width: width * .5,

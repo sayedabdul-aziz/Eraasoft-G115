@@ -1,6 +1,7 @@
-import 'package:chat_app_ui/colors.dart';
+import 'package:chat_app_ui/chat/chat_details_view.dart';
 import 'package:chat_app_ui/chat/user_model.dart';
 import 'package:chat_app_ui/chat/widgets/fav_contacts.dart';
+import 'package:chat_app_ui/colors.dart';
 import 'package:flutter/material.dart';
 
 class ChatView extends StatelessWidget {
@@ -61,7 +62,13 @@ class ChatView extends StatelessWidget {
                         backgroundImage: NetworkImage(chats[index].image),
                       ),
                       trailing: Text(chats[index].time),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChatDetailsView(
+                              imageUrl: chats[index].image,
+                              name: chats[index].name),
+                        ));
+                      },
                     );
                   },
                   separatorBuilder: (context, index) {

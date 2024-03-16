@@ -34,9 +34,9 @@ class _UploadViewState extends State<UploadView> {
                 // no name and no image
                 if (path != null && name.isNotEmpty) {
                   // cache data and navigate
-                  AppLocalStorage.cacheDate('name', name);
-                  AppLocalStorage.cacheDate('image', path);
-                  AppLocalStorage.cacheDate('isUpload', true);
+                  AppLocalStorage.cacheData('name', name);
+                  AppLocalStorage.cacheData('image', path);
+                  AppLocalStorage.cacheData('isUpload', true);
                   navigateWithReplacment(context, const HomeView());
                 } else if (path == null && name.isNotEmpty) {
                   showErrorDialog(context, 'Please Enter Your Image');
@@ -66,14 +66,14 @@ class _UploadViewState extends State<UploadView> {
               CustomButton(
                   text: 'Upload from Camera',
                   onPressed: () {
-                    uploadFromCamera();
+                    uploadImage(true);
                   },
                   width: 250),
               const Gap(10),
               CustomButton(
                   text: 'Upload from Gallery',
                   onPressed: () {
-                    uploadFromGallery();
+                    uploadImage(false);
                   },
                   width: 250),
               const Gap(10),
@@ -99,19 +99,9 @@ class _UploadViewState extends State<UploadView> {
     );
   }
 
-  uploadFromCamera() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (pickedImage != null) {
-      setState(() {
-        path = pickedImage.path;
-      });
-    }
-  }
-
-  uploadFromGallery() async {
-    final pickedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+  uploadImage(bool isCamera) async {
+    final pickedImage = await ImagePicker()
+        .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         path = pickedImage.path;

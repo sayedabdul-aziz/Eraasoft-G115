@@ -34,6 +34,7 @@ class _AddTaskViewState extends State<AddTaskView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     startTime = widget.model != null
         ? widget.model?.startTime
         : DateFormat('hh:mm a').format(DateTime.now());
@@ -51,7 +52,7 @@ class _AddTaskViewState extends State<AddTaskView> {
         centerTitle: true,
         title: Text(
           'Add Task',
-          style: getTitleStyle(color: AppColors.primary),
+          style: getTitleStyle(context, color: AppColors.primary),
         ),
       ),
       body: Padding(
@@ -61,7 +62,9 @@ class _AddTaskViewState extends State<AddTaskView> {
           children: [
             Text(
               'Title',
-              style: getTitleStyle(),
+              style: getTitleStyle(
+                context,
+              ),
             ),
             const Gap(5),
             TextFormField(
@@ -74,7 +77,9 @@ class _AddTaskViewState extends State<AddTaskView> {
             const Gap(10),
             Text(
               'Note',
-              style: getTitleStyle(),
+              style: getTitleStyle(
+                context,
+              ),
             ),
             const Gap(5),
             TextFormField(
@@ -85,19 +90,44 @@ class _AddTaskViewState extends State<AddTaskView> {
             const Gap(10),
             Text(
               'Date',
-              style: getTitleStyle(),
+              style: getTitleStyle(
+                context,
+              ),
             ),
             const Gap(5),
             TextFormField(
               readOnly: true,
               onTap: () {
                 showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(
-                            DateTime.now().add(const Duration(days: 365)).year))
-                    .then((value) {
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(
+                      DateTime.now().add(const Duration(days: 365)).year),
+                  // builder: (context, child) {
+                  //   return Theme(
+                  //     data: ThemeData(
+                  //       // dialogBackgroundColor: AppColors.black,
+                  //       datePickerTheme: DatePickerThemeData(
+                  //           headerForegroundColor: theme.onSurface,
+                  //           yearForegroundColor:
+                  //               MaterialStatePropertyAll(theme.primary)),
+                  //       colorScheme: ColorScheme.fromSeed(
+                  //           primary: theme.primary, // header background color
+                  //           onPrimary: theme.primary, // header text color
+                  //           onSurface: theme.primary,
+                  //           seedColor: theme.background // body text color
+                  //           ),
+                  //       textButtonTheme: TextButtonThemeData(
+                  //         style: TextButton.styleFrom(
+                  //           foregroundColor: theme.primary, // button text color
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     child: child!,
+                  //   );
+                  // },
+                ).then((value) {
                   if (value != null) {
                     setState(() {
                       date = DateFormat("dd/MM/yyyy").format(value);
@@ -107,7 +137,8 @@ class _AddTaskViewState extends State<AddTaskView> {
               },
               decoration: InputDecoration(
                   suffixIcon: const Icon(Icons.calendar_month_rounded),
-                  hintText: date),
+                  hintText: date,
+                  hintStyle: getBodyStyle(context)),
             ),
             const Gap(10),
             Row(
@@ -115,14 +146,18 @@ class _AddTaskViewState extends State<AddTaskView> {
                 Expanded(
                   child: Text(
                     'Start Time',
-                    style: getTitleStyle(),
+                    style: getTitleStyle(
+                      context,
+                    ),
                   ),
                 ),
                 const Gap(10),
                 Expanded(
                   child: Text(
                     'End Time',
-                    style: getTitleStyle(),
+                    style: getTitleStyle(
+                      context,
+                    ),
                   ),
                 ),
               ],
@@ -147,7 +182,8 @@ class _AddTaskViewState extends State<AddTaskView> {
                     },
                     decoration: InputDecoration(
                         suffixIcon: const Icon(Icons.watch_later_outlined),
-                        hintText: startTime),
+                        hintText: startTime,
+                        hintStyle: getBodyStyle(context)),
                   ),
                 ),
                 const Gap(10),
@@ -167,7 +203,8 @@ class _AddTaskViewState extends State<AddTaskView> {
                     },
                     decoration: InputDecoration(
                         suffixIcon: const Icon(Icons.watch_later_outlined),
-                        hintText: endTime),
+                        hintText: endTime,
+                        hintStyle: getBodyStyle(context)),
                   ),
                 ),
               ],

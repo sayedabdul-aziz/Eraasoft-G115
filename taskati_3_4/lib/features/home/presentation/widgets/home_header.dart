@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:taskati_3_4/core/functions/routing.dart';
 import 'package:taskati_3_4/core/services/local_storage.dart';
 import 'package:taskati_3_4/core/utils/colors.dart';
 import 'package:taskati_3_4/core/utils/text_styles.dart';
+import 'package:taskati_3_4/features/profile/presentation/view/profile_view.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({
@@ -34,26 +36,20 @@ class _HomeHeaderState extends State<HomeHeader> {
           children: [
             Text(
               'Hello, ${name.isEmpty ? '' : name}',
-              style: getTitleStyle(color: AppColors.primary),
+              style: getTitleStyle(context, color: AppColors.primary),
             ),
             Text(
               'Have A Nice Day.',
-              style: getBodyStyle(),
+              style: getBodyStyle(
+                context,
+              ),
             ),
           ],
         ),
         const Spacer(),
         InkWell(
           onTap: () {
-            // showTimePicker(
-            //   context: context,
-            //   initialTime: TimeOfDay.now(),
-            // );
-            // showDatePicker(
-            //     context: context,
-            //     initialDate: DateTime.now(),
-            //     firstDate: DateTime.now(),
-            //     lastDate: DateTime(2050));
+            navigateTo(context, const ProfileView());
           },
           child: CircleAvatar(
             radius: 22,

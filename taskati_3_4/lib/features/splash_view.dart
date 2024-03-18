@@ -19,7 +19,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    bool isUpload = AppLocalStorage.getCachedData('isUpload')??false;
+    bool isUpload = AppLocalStorage.getCachedData('isUpload') ?? false;
     Future.delayed(const Duration(seconds: 3), () {
       navigateWithReplacment(
           context, (isUpload) ? const HomeView() : const UploadView());
@@ -39,7 +39,8 @@ class _SplashViewState extends State<SplashView> {
             const Gap(20),
             Text(
               'Taskati',
-              style: getTitleStyle(fontWeight: FontWeight.w500, fontSize: 22),
+              style: getTitleStyle(context,
+                  fontWeight: FontWeight.w500, fontSize: 22),
             ),
             const Gap(10),
             Text('It\'s Time To Get Organized', style: getSmallStyle()),

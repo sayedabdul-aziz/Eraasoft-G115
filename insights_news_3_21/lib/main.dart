@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:insights_news_3_21/core/services/local_storage.dart';
+import 'package:insights_news_3_21/core/utils/colors.dart';
 import 'package:insights_news_3_21/features/splash_view.dart';
 
 Future<void> main() async {
@@ -13,8 +14,22 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SplashView(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.background,
+          appBarTheme: AppBarTheme(
+            backgroundColor: AppColors.background,
+          ),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            backgroundColor: AppColors.background,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: AppColors.grey,
+          )),
+      home: const SplashView(),
     );
   }
 }

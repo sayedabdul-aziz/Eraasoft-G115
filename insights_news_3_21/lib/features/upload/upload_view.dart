@@ -25,9 +25,7 @@ class _UploadViewState extends State<UploadView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
         actions: [
           TextButton(
             onPressed: () {
@@ -46,7 +44,10 @@ class _UploadViewState extends State<UploadView> {
                     context, 'Please Upload Your Image and Enter Your Name');
               }
             },
-            child: const Text('Done'),
+            child: Text(
+              'Done',
+              style: getBodyStyle(color: AppColors.primary),
+            ),
           ),
         ],
       ),
@@ -59,7 +60,7 @@ class _UploadViewState extends State<UploadView> {
               // IMAGE
               CircleAvatar(
                 radius: 70,
-                backgroundColor: AppColors.primary,
+                backgroundColor: AppColors.grey,
                 backgroundImage: (path != null)
                     ? FileImage(File(path!)) as ImageProvider
                     : const AssetImage('assets/user.png'),
@@ -103,6 +104,8 @@ class _UploadViewState extends State<UploadView> {
               ),
 
               TextFormField(
+                style: getBodyStyle(),
+                cursorColor: AppColors.primary,
                 onChanged: (value) {
                   setState(() {
                     name = value;

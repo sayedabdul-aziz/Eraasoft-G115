@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:insights_news_3_21/core/utils/colors.dart';
-import 'package:insights_news_3_21/features/home/home_view.dart';
+import 'package:insights_news_3_21/features/home/presentation/view/home_view.dart';
 import 'package:insights_news_3_21/features/profile/views/profile_view.dart';
 import 'package:insights_news_3_21/features/search/search_view.dart';
 import 'package:insights_news_3_21/features/source/source_view.dart';

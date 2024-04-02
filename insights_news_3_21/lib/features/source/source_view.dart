@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:insights_news_3_21/core/utils/text_styles.dart';
 
 class SourceView extends StatelessWidget {
   const SourceView({super.key});
@@ -7,10 +6,20 @@ class SourceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          'Source',
-          style: getBodyStyle(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          itemBuilder: (context, index) {
+            return Container(
+              color: Colors.blue,
+              height: 200,
+            );
+          },
         ),
       ),
     );

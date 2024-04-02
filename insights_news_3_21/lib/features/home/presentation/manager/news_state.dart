@@ -17,6 +17,20 @@ class NewsByCategoryErrorState extends NewsStates {
   NewsByCategoryErrorState(this.error);
 }
 
+// search
+class NewsBySearchLoadingState extends NewsStates {}
+
+class NewsBySearchSuccessState extends NewsStates {
+  final NewsModel model;
+  NewsBySearchSuccessState(this.model);
+}
+
+class NewsBySearchErrorState extends NewsStates {
+  final String error;
+
+  NewsBySearchErrorState(this.error);
+}
+
 // get source
 class NewsBySourceLoadingState extends NewsStates {}
 

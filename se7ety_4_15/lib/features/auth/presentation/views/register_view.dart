@@ -11,6 +11,7 @@ import 'package:se7ety_4_15/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:se7ety_4_15/features/auth/presentation/manager/auth_states.dart';
 import 'package:se7ety_4_15/features/auth/presentation/views/doctor_register_data.dart';
 import 'package:se7ety_4_15/features/auth/presentation/views/signin_view.dart';
+import 'package:se7ety_4_15/features/patient/nav_bar.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key, required this.index});
@@ -37,7 +38,11 @@ class _RegisterViewState extends State<RegisterView> {
     return BlocListener<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          pushAndRemoveUntil(context, const DoctorUploadData());
+          if (widget.index == 0) {
+            pushAndRemoveUntil(context, const DoctorUploadData());
+          } else {
+            pushAndRemoveUntil(context, const PatientNavBar());
+          }
         } else if (state is RegisterErrorState) {
           Navigator.pop(context);
           showErrorDialog(context, state.error);

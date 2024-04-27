@@ -6,7 +6,11 @@ class AuthInitialState extends AuthStates {}
 
 class LoginLoadingState extends AuthStates {}
 
-class LoginSuccessState extends AuthStates {}
+class LoginSuccessState extends AuthStates {
+  final String role;
+
+  LoginSuccessState({required this.role});
+}
 
 class LoginErrorState extends AuthStates {
   final String error;

@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:se7ety_4_15/core/functions/routing.dart';
 import 'package:se7ety_4_15/core/utils/colors.dart';
 import 'package:se7ety_4_15/core/utils/styles.dart';
 import 'package:se7ety_4_15/core/widgets/custom_dialogs.dart';
 import 'package:se7ety_4_15/features/auth/data/specialization_list.dart';
 import 'package:se7ety_4_15/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:se7ety_4_15/features/auth/presentation/manager/auth_states.dart';
+import 'package:se7ety_4_15/features/doctor/nav_bar.dart';
 
 class DoctorUploadData extends StatefulWidget {
   const DoctorUploadData({super.key});
@@ -79,7 +81,7 @@ class _DoctorUploadDataState extends State<DoctorUploadData> {
     return BlocListener<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is UpdateSuccessState) {
-          // home
+          pushAndRemoveUntil(context, const DoctorNavBar());
         } else if (state is UpdateErrorState) {
           Navigator.pop(context);
           showErrorDialog(context, state.error);

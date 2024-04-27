@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:se7ety_4_15/core/functions/email_validate.dart';
+import 'package:se7ety_4_15/core/functions/routing.dart';
 import 'package:se7ety_4_15/core/utils/colors.dart';
 import 'package:se7ety_4_15/core/utils/styles.dart';
 import 'package:se7ety_4_15/core/widgets/custom_button.dart';
@@ -11,6 +10,8 @@ import 'package:se7ety_4_15/core/widgets/custom_dialogs.dart';
 import 'package:se7ety_4_15/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:se7ety_4_15/features/auth/presentation/manager/auth_states.dart';
 import 'package:se7ety_4_15/features/auth/presentation/views/register_view.dart';
+import 'package:se7ety_4_15/features/doctor/nav_bar.dart';
+import 'package:se7ety_4_15/features/patient/nav_bar.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key, required this.index});
@@ -36,7 +37,11 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is LoginSuccessState) {
-          log('done');
+          if (state.role == '0') {
+            pushAndRemoveUntil(context, const DoctorNavBar());
+          } else {
+            pushAndRemoveUntil(context, const PatientNavBar());
+          }
         } else if (state is LoginErrorState) {
           Navigator.pop(context);
           showErrorDialog(context, state.error);

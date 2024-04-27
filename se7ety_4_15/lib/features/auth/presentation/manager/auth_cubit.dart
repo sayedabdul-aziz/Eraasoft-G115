@@ -10,10 +10,10 @@ class AuthCubit extends Cubit<AuthStates> {
   login(String email, String password) async {
     emit(LoginLoadingState());
     try {
-      await FirebaseAuth.instance
+      var credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      emit(LoginSuccessState());
+      emit(LoginSuccessState(role: credential.user!.photoURL!));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         emit(LoginErrorState('الحساب غير موجود'));
@@ -36,6 +36,7 @@ class AuthCubit extends Cubit<AuthStates> {
       );
       User user = credential.user!;
       await user.updateDisplayName(name);
+      await user.updatePhotoURL('0');
 
       // store in firestore
       FirebaseFirestore.instance.collection('doctors').doc(user.uid).set({
@@ -76,6 +77,9 @@ class AuthCubit extends Cubit<AuthStates> {
       );
       User user = credential.user!;
       await user.updateDisplayName(name);
+
+      // role
+      await user.updatePhotoURL('1');
 
       // store in firestore
       FirebaseFirestore.instance.collection('patients').doc(user.uid).set({

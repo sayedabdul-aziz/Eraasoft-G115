@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:se7ety_4_15/core/utils/colors.dart';
 import 'package:se7ety_4_15/core/utils/styles.dart';
 import 'package:se7ety_4_15/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:se7ety_4_15/features/intro/splash_view.dart';
+import 'package:se7ety_4_15/features/doctor/nav_bar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +31,11 @@ class MainApp extends StatelessWidget {
             scaffoldBackgroundColor: AppColors.white,
             snackBarTheme:
                 SnackBarThemeData(backgroundColor: AppColors.redColor),
+            scrollbarTheme: ScrollbarThemeData(
+                thumbColor: MaterialStatePropertyAll(AppColors.color1),
+                // trackColor: MaterialStatePropertyAll(AppColors.color2),
+                // trackVisibility: const MaterialStatePropertyAll(true),
+                radius: const Radius.circular(20)),
             appBarTheme: AppBarTheme(
                 titleTextStyle: getTitleStyle(color: AppColors.white),
                 centerTitle: true,
@@ -59,7 +64,7 @@ class MainApp extends StatelessWidget {
               endIndent: 10,
             ),
             fontFamily: GoogleFonts.cairo().fontFamily),
-        home: const SplashView(),
+        home: const DoctorNavBar(),
         builder: (context, child) {
           return Directionality(
             textDirection: TextDirection.rtl,
